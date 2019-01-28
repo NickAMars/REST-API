@@ -11,7 +11,7 @@ class UserProfileMangager(BaseUserManager):
         """Creates a new user profile objec."""
         if not email: # check if email doesnt exist
             raise ValueError("Users must have an email address.")
-        email = self.nomalize_email(email) #converts the characters to lower case
+        email = self.normalize_email(email) #converts the characters to lower case
         user = self.model(email=email, name=name) # create a new user profile model
 
         user.set_password(password) # encript the password for us
