@@ -8,7 +8,9 @@ router.register(
  views.HelloViewSet, # name of viewset
  base_name='hello-viewset'
  )
-
+ # django can auto matically figure out the base name by
+ #the model thats register with the serializer on the view set
+router.register('profile', views.UserProfileViewSet)
 urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),
     #router create the url for us automatically generate
