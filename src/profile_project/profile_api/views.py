@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 # most effective way to authenticate with the api
 from rest_framework.authentication import  TokenAuthentication
+# adding search profile features
+from rest_framework import filters
+
 from . import serializers
 from . import models
 from . import permissions
@@ -94,3 +97,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     #Adding authenticate and permission to the view set
     authentication_classes = (TokenAuthentication,) # toople
     permission_classes = (permissions.UpdateOwnProfile,)
+    # adding search profile features
+    filter_backends = (filters.SearchFilter,)
+    #which fill we want the user to filter by
+    search_fields = ('name', 'email',)
