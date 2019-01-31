@@ -13,6 +13,7 @@ router.register(
 router.register('profile', views.UserProfileViewSet)
 #its not  a model view set so we need the base_name
 router.register('login', views.LoginViewSet, base_name='login')
+router.register('feed', views.UserProfileFeedViewSet)
 urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),
     #router create the url for us automatically generate
