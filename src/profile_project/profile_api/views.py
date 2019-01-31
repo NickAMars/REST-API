@@ -8,6 +8,9 @@ from rest_framework import status
 from rest_framework.authentication import  TokenAuthentication
 # adding search profile features
 from rest_framework import filters
+#login api view
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authtoken.views import ObtainAuthToken
 
 from . import serializers
 from . import models
@@ -30,6 +33,7 @@ class HelloApiView(APIView):
     def post(self, request):
         """Create a hello message with our name."""
         serializer = serializers.HelloSerializer(data=request.data)
+        Print("Hello Post methods")
         if serializer.is_valid():
             name = serializer.data.get('name')
             message = 'Hello {0}'.format(name)
@@ -101,3 +105,9 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     #which fill we want the user to filter by
     search_fields = ('name', 'email',)
+class LoginViewSet(viewsets.ViewSet):
+    """Checks email and password and returns an auth token."""
+    serializer_class = AuthTokenSerializer
+    def create(self, request):
+        """Use the ObtainAuthToken ApiView to validate and create a token."""
+        return ObtainAuthToken().post(request)
