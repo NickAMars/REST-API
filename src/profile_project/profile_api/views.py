@@ -33,7 +33,6 @@ class HelloApiView(APIView):
     def post(self, request):
         """Create a hello message with our name."""
         serializer = serializers.HelloSerializer(data=request.data)
-        Print("Hello Post methods")
         if serializer.is_valid():
             name = serializer.data.get('name')
             message = 'Hello {0}'.format(name)
